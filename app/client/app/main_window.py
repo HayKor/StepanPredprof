@@ -5,9 +5,6 @@ import sys
 import requests
 import numpy as np
 from PIL import Image, ImageQt
-from app.lib.utils.parser_map import fetch_tile
-
-print(fetch_tile("https://olimp.miet.ru/ppo_it/api"))
 
 API_URL = "https://olimp.miet.ru/ppo_it/api"
 
