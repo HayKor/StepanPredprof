@@ -1,6 +1,13 @@
 import sys
 import requests
 import numpy as np
+import matplotlib.pyplot as plt
+import numpy as np
+from mpl_toolkits.mplot3d import axes3d
+
+
+from matplotlib import cm
+from matplotlib.ticker import LinearLocator
 
 def fetch_tile(url):
     response = requests.get(url)
@@ -32,4 +39,20 @@ def find(map):
 
 if __name__ == "__main__":
     map = generate_map()
-    print(find(map))
+    x = np.arange(0, 256, 1)
+    y = np.arange(0, 256, 1)
+    X, Y = np.meshgrid(x, y)
+    Z = map
+
+    fig = plt.figure(figsize=(10, 8))
+    ax = fig.add_subplot(111, projection='3d')
+
+    surf = ax.plot_surface(X, Y, Z, cmap=cm.coolwarm,
+                          linewidth=0, antialiased=False)
+    
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Высота')
+    fig.colorbar(surf, shrink=0.5, aspect=5)
+
+    plt.show()
